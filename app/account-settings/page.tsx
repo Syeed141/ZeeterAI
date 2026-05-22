@@ -23,10 +23,10 @@ export default async function AccountSettingsPage({
   return <AccountSettings currentPanel={currentPanel} />;
 }
 
-function getCurrentPanel(panel?: string): SettingsPanel {
+function getCurrentPanel(panel?: string): SettingsPanel | null {
   if (panels.includes(panel as SettingsPanel)) {
     return panel as SettingsPanel;
   }
 
-  return "profile";
+  return null;
 }

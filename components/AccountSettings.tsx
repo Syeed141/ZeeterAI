@@ -58,7 +58,7 @@ const settingsOptions: SettingsOption[] = [
 export default function AccountSettings({
   currentPanel,
 }: {
-  currentPanel: SettingsPanel;
+  currentPanel: SettingsPanel | null;
 }) {
   return (
     <section className="min-h-[calc(100vh-76px)] bg-[#faf9f7] px-6 py-6 md:min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-80px)] lg:px-0 lg:py-[18px]">
@@ -136,7 +136,7 @@ function TokenBox() {
   );
 }
 
-function SettingsMenu({ currentPanel }: { currentPanel: SettingsPanel }) {
+function SettingsMenu({ currentPanel }: { currentPanel: SettingsPanel | null }) {
   return (
     <div className="mt-5 space-y-2">
       {settingsOptions.map((option) => (
@@ -156,8 +156,12 @@ function SettingsMenu({ currentPanel }: { currentPanel: SettingsPanel }) {
 function SettingsPanelContent({
   currentPanel,
 }: {
-  currentPanel: SettingsPanel;
+  currentPanel: SettingsPanel | null;
 }) {
+  if (!currentPanel) {
+    return null;
+  }
+
   if (currentPanel === "profile") {
     return <AccountProfilePanel userProfile={userProfile} />;
   }
