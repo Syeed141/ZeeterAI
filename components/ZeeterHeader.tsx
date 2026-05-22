@@ -36,7 +36,7 @@ export default function SiteHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-gray-100 bg-white">
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-gray-100 bg-base">
       <div className="mx-auto grid h-19 w-full grid-cols-[24px_1fr_auto] items-center gap-4 px-5 md:flex md:h-14 md:justify-between md:px-6 lg:h-20 lg:max-w-400 lg:px-40">
         {/* Logo */}
         <Link href="/" className="flex items-center">
