@@ -5,6 +5,7 @@ import SiteHeader from "@/components/ZeeterHeader";
 
 const onest = Onest({
   subsets: ["latin"],
+  variable: "--font-onest",
   fallback: ["Arial", "Helvetica", "sans-serif"],
 });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={onest.className}>
+      <body className={onest.variable}>
         <SiteHeader />
 
         <main className="pt-[76px] md:pt-14 lg:pt-20">{children}</main>
