@@ -9,6 +9,7 @@ import {
   Wallet,
 } from "lucide-react";
 import AccountProfilePanel from "@/components/AccountProfilePanel";
+import AccountTokensPanel from "@/components/AccountTokensPanel";
 import {
   getMenuClassName,
   getSelectedSettingsOption,
@@ -66,13 +67,13 @@ export default function AccountSettings({
 }) {
   return (
     <section className="min-h-[calc(100vh-76px)] bg-[#faf9f7] px-6 py-6 md:h-[calc(100vh-56px)] md:min-h-0 lg:h-[calc(100vh-80px)] lg:px-0 lg:py-4.5">
-      <div className="mx-auto grid h-full w-full max-w-310 gap-5 md:grid-cols-[340px_minmax(0,1fr)]">
+      <div className="mx-auto grid h-full min-h-0 w-full max-w-310 gap-5 md:grid-cols-[340px_minmax(0,1fr)]">
         <div className={currentPanel ? "hidden min-w-0 md:block" : "min-w-0"}>
           <ProfileCard />
           <SettingsMenu currentPanel={currentPanel} />
         </div>
 
-        <div className="min-w-0 md:overflow-y-auto md:pr-1">
+        <div className="min-w-0 md:min-h-0 md:overflow-y-auto md:pb-20 md:pr-1">
           {currentPanel && (
             <Link
               href="/account-settings"
@@ -179,6 +180,10 @@ function SettingsPanelContent({
 
   if (currentPanel === "profile") {
     return <AccountProfilePanel userProfile={userProfile} />;
+  }
+
+  if (currentPanel === "tokens") {
+    return <AccountTokensPanel />;
   }
 
   const selectedOption = getSelectedSettingsOption(settingsOptions, currentPanel);
