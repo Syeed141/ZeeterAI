@@ -130,7 +130,7 @@ function PhotosCard({ userProfile }: { userProfile: UserProfile }) {
         <div className="grid grid-cols-1 lg:flex lg:gap-3 lg:mt-20">
           <button
             type="button"
-            className="h-10 rounded-full bg-gray-100 px-4 text-sm  sm:text-xs text-black hover:bg-gray-200 lg:px-5 mb-4"
+            className="h-10 rounded-full bg-gray-100 px-4 text-xs  text-black hover:bg-gray-200 sm:text-sm  lg:px-5 mb-4"
           >
             Upload New Photo
           </button>
