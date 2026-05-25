@@ -103,10 +103,10 @@ function ProfileCard() {
         />
 
         <div className="pt-1">
-          <h1 className="text-[18px] font-semibold leading-6 text-black">
+          <h1 className="text-[18px] font-semibold leading-6 text-black ">
             {userProfile.name}
           </h1>
-          <p className="mt-2 text-[15px] leading-5 text-gray-800">
+          <p className="mt-2 text-sm leading-5 text-gray-800 ">
             {userProfile.email}
           </p>
         </div>

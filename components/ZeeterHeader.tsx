@@ -70,10 +70,13 @@ const profileMenuItems: ProfileMenuItem[] = [
 ];
 
 export default function SiteHeader() {
+
+  // for active nav header
   const pathname = usePathname();
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
+  // for closing profile menu
   useEffect(() => {
     function closeProfileMenu(event: MouseEvent) {
       const clickedElement = event.target as Node;
@@ -88,6 +91,7 @@ export default function SiteHeader() {
     return () => document.removeEventListener("mousedown", closeProfileMenu);
   }, []);
 
+  
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-gray-100 bg-background">
       <div className="mx-auto grid h-19 w-full grid-cols-[24px_1fr_auto] items-center gap-4 px-5 md:flex md:h-14 md:justify-between md:px-6 lg:h-20 lg:max-w-400 lg:px-40">
