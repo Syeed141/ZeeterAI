@@ -14,13 +14,10 @@ import {
   MessageCircle,
   UserRound,
 } from "lucide-react";
+import { classNames, isActivePath } from "@/helpers/header";
 import type { NavItem, ProfileMenuItem } from "@/types/header";
 
 const iconClassName = "h-5 w-5 md:h-4 md:w-4 lg:h-5 lg:w-5";
-
-function classNames(...classes: Array<string | false>) {
-  return classes.filter(Boolean).join(" ");
-}
 
 function MatchesIcon({
   className = iconClassName,
@@ -71,10 +68,6 @@ const profileMenuItems: ProfileMenuItem[] = [
     Icon: LogOut,
   },
 ];
-
-function isActivePath(pathname: string, href: string) {
-  return href === "/" ? pathname === href : pathname.startsWith(href);
-}
 
 export default function SiteHeader() {
   const pathname = usePathname();

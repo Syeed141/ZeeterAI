@@ -9,6 +9,10 @@ import {
   Wallet,
 } from "lucide-react";
 import AccountProfilePanel from "@/components/AccountProfilePanel";
+import {
+  getMenuClassName,
+  getSelectedSettingsOption,
+} from "@/helpers/account-settings";
 import type {
   SettingsOption,
   SettingsPanel,
@@ -61,14 +65,25 @@ export default function AccountSettings({
   currentPanel: SettingsPanel | null;
 }) {
   return (
-    <section className="min-h-[calc(100vh-76px)] bg-[#faf9f7] px-6 py-6 md:min-h-[calc(100vh-56px)] lg:min-h-[calc(100vh-80px)] lg:px-0 lg:py-[18px]">
-      <div className="mx-auto grid w-full max-w-[1240px] gap-5 lg:grid-cols-[390px_1fr]">
-        <div>
+    <section className="min-h-[calc(100vh-76px)] bg-[#faf9f7] px-6 py-6 md:h-[calc(100vh-56px)] md:min-h-0 lg:h-[calc(100vh-80px)] lg:px-0 lg:py-4.5">
+      <div className="mx-auto grid h-full w-full max-w-310 gap-5 md:grid-cols-[340px_minmax(0,1fr)]">
+        <div className={currentPanel ? "hidden min-w-0 md:block" : "min-w-0"}>
           <ProfileCard />
           <SettingsMenu currentPanel={currentPanel} />
         </div>
 
-        <SettingsPanelContent currentPanel={currentPanel} />
+        <div className="min-w-0 md:overflow-y-auto md:pr-1">
+          {currentPanel && (
+            <Link
+              href="/account-settings"
+              className="mb-3 inline-flex h-8 items-center rounded-full border border-gray-200 bg-white px-4 text-[13px] font-medium text-black shadow-sm md:hidden"
+            >
+              Back
+            </Link>
+          )}
+
+          <SettingsPanelContent currentPanel={currentPanel} />
+        </div>
       </div>
     </section>
   );
@@ -76,14 +91,14 @@ export default function AccountSettings({
 
 function ProfileCard() {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.08)]">
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-[0_2px_4px_rgba(0,0,0,0.08)] md:h-[284px]">
       <div className="flex items-start gap-4">
         <Image
           src={userProfile.image}
           alt={userProfile.name}
           width={68}
           height={68}
-          className="h-[68px] w-[68px] rounded-xl object-cover"
+          className="h-17 w-17 rounded-xl object-cover"
           priority
         />
 
@@ -145,7 +160,7 @@ function SettingsMenu({ currentPanel }: { currentPanel: SettingsPanel | null }) 
           href={`/account-settings?currentPanel=${option.panel}`}
           className={getMenuClassName(option.panel === currentPanel)}
         >
-          <option.Icon className="h-[18px] w-[18px]" strokeWidth={1.8} />
+          <option.Icon className="h-4.5 w-4.5" strokeWidth={1.8} />
           <span>{option.label}</span>
         </Link>
       ))}
@@ -166,9 +181,7 @@ function SettingsPanelContent({
     return <AccountProfilePanel userProfile={userProfile} />;
   }
 
-  const selectedOption = settingsOptions.find(
-    (option) => option.panel === currentPanel,
-  );
+  const selectedOption = getSelectedSettingsOption(settingsOptions, currentPanel);
 
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-7 shadow-[0_2px_4px_rgba(0,0,0,0.08)]">
@@ -178,15 +191,4 @@ function SettingsPanelContent({
       <p className="mt-4 text-[15px] text-gray-500">-</p>
     </div>
   );
-}
-
-function getMenuClassName(isActive: boolean) {
-  const baseClassName =
-    "flex h-11 w-full cursor-pointer items-center gap-3 px-3 text-left text-[15px] leading-5 text-black hover:bg-[#ffefd7]";
-
-  if (!isActive) {
-    return baseClassName;
-  }
-
-  return `${baseClassName} border-l-2 border-orange-500 bg-[#ffefd7]`;
 }

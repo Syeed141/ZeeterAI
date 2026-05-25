@@ -95,8 +95,10 @@ export default function AccountProfilePanel({
   userProfile: UserProfile;
 }) {
   return (
-    <div className="w-full">
-      <h1 className="text-[22px] font-semibold leading-7 text-black">My Profile</h1>
+    <div className="w-full min-w-0">
+      <h1 className="text-[22px] font-semibold leading-7 text-black">
+        My Profile
+      </h1>
 
       <div className="mt-8 space-y-7">
         <PhotosCard userProfile={userProfile} />
@@ -114,7 +116,7 @@ function PhotosCard({ userProfile }: { userProfile: UserProfile }) {
     <section className="rounded-2xl border border-gray-200 bg-white p-7 shadow-[0_2px_4px_rgba(0,0,0,0.08)]">
       <h2 className="text-[17px] font-semibold leading-6 text-black">Photos</h2>
 
-      <div className="mt-6 flex items-center gap-5">
+      <div className="mt-6 flex items-center gap-4 lg:gap-5">
         <div className="rounded-lg border border-gray-200 p-2">
           <Image
             src={userProfile.image}
@@ -125,19 +127,21 @@ function PhotosCard({ userProfile }: { userProfile: UserProfile }) {
           />
         </div>
 
-        <button
-          type="button"
-          className="h-10 rounded-full bg-gray-100 px-5 text-[14px] text-black hover:bg-gray-200"
-        >
-          Upload New Photo
-        </button>
+        <div className="grid grid-cols-1 lg:flex lg:gap-3 lg:mt-20">
+          <button
+            type="button"
+            className="h-10 rounded-full bg-gray-100 px-4 text-[14px] text-black hover:bg-gray-200 lg:px-5 mb-4"
+          >
+            Upload New Photo
+          </button>
 
-        <button
-          type="button"
-          className="h-10 rounded-full bg-red-500 px-5 text-[14px] font-semibold text-white hover:bg-red-600"
-        >
-          Delete
-        </button>
+          <button
+            type="button"
+            className="h-10 w-fit rounded-full bg-red-500 px-4  text-[14px] font-semibold text-white hover:bg-red-600 lg:px-5"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -171,13 +175,13 @@ function ProfileSectionCard({ section }: { section: ProfileSection }) {
             key={field.label}
             className={index > 0 ? "border-t border-gray-200 pt-5 mt-5" : ""}
           >
-            <div className="grid grid-cols-[180px_1fr] gap-5 text-[14px] leading-5 text-black">
+            <div className="grid gap-2 text-[14px] leading-5 text-black lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-5">
               <span>{field.label}</span>
-              <span>{field.value}</span>
+              <span className="break-words">{field.value}</span>
             </div>
 
             {field.helpText && (
-              <p className="mt-1 pl-[200px] text-[12px] leading-5 text-gray-500">
+              <p className="mt-1 text-[12px] leading-5 text-gray-500 lg:pl-[200px]">
                 {field.helpText}
               </p>
             )}
@@ -195,7 +199,7 @@ function AccountSecurityCard() {
         Account Security
       </h2>
 
-      <div className="mt-7 flex items-center gap-8">
+      <div className="mt-7 flex flex-wrap items-center gap-4 lg:gap-8">
         <button
           type="button"
           className="flex h-12 items-center gap-3 rounded-full border border-gray-200 px-5 text-[15px] text-black hover:bg-gray-50"
